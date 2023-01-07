@@ -25,7 +25,7 @@ namespace projekt1
                     nazwisko = input[1];
                     pesel = input[2];
 
-                    //poprawność PESELU
+                    //poprawność numeru PESEL
                     if (PeselCheck.IsValid(pesel))
                     {
                         string fileName = pesel + ".txt";
@@ -48,7 +48,7 @@ namespace projekt1
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Błąd. Szczegóły: {0} ", e);
+                    Console.WriteLine("Błąd wpisywania! Szczegóły: {0} ", e);
                 }
             }
             while (loop); 
