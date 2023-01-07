@@ -16,7 +16,7 @@ namespace projekt1
         static void Main(string[] args)
         {
 
-            bool isValidInput = false;
+            bool loop = true;
             do
             {
                 Console.WriteLine("");
@@ -32,35 +32,28 @@ namespace projekt1
                 //poprawność PESELU
                 if (PeselCheck.IsValid(pesel))
                 {
-                    isValidInput = true;
+                    string fileName = pesel + ".txt";
+                    string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    string filePath = Path.Combine(desktopPath, fileName);
+                    //jeżeli jest plik na pulpicie o nazwie *pesel* to wtedy go nadpisz
+                    if (File.Exists(filePath))
+                    {
+                        Console.WriteLine("Plik o numerze PESEL: {0} już istnieje! Został on nadpisany.", pesel);
+                        File.WriteAllText(fileName, "");
+                        loop = false;
+                    }           
+                        StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite));
+                        writer.WriteLine("{0}", miasto);
+                        writer.WriteLine("{0} {1} {2}", imie, nazwisko, pesel);
+                        writer.WriteLine("");
+                        writer.Close();                
                 }
                 else
                 {
-                    Console.WriteLine("Niepoprawny PESEL!");
+                    Console.WriteLine("Niepoprawny PESEL!");                 
                 }
-
-
-                string fileName = pesel + ".txt";
-                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string filePath = Path.Combine("pesel", fileName);
-                string folderPath = Path.Combine(desktopPath, filePath);
-
-                //jeżeli jest plik na pulpicie o nazwie *pesel* to wtedy go nadpisz
-                if (File.Exists(filePath))
-                {
-                    Console.WriteLine("Plik o numerze PESEL: {0} już istnieje! Został on nadpisany.", pesel);
-                    File.WriteAllText(fileName, "");
-
-                }
-
-                //wpisywanie danych do pliku pesel.txt
-                StreamWriter writer = new StreamWriter(new FileStream(folderPath, FileMode.OpenOrCreate, FileAccess.ReadWrite));
-                writer.WriteLine("{0}", miasto);
-                writer.WriteLine("{0} {1} {2}", imie, nazwisko, pesel);
-                writer.WriteLine("");
-                writer.Close();
             }
-            while (!isValidInput);
+            while (loop); 
 
 
         }
