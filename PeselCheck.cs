@@ -8,6 +8,7 @@ namespace projekt
 {
     public static class PeselCheck
     {
+        //metoda zwraca true w przypadku pomyślnej walidacji oraz false w przypadku błednej
         public static bool IsValid(string pesel)
         {
             //sprawdzanie długości peselu

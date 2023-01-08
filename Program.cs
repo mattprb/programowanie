@@ -16,6 +16,7 @@ namespace projekt
             {
                 try
                 {
+                    //użytkownik wpisuje dane w konsoli
                     Console.WriteLine("");
                     Console.WriteLine("Podaj nazwę miasta:");
                     string miasto = Console.ReadLine();
@@ -26,7 +27,7 @@ namespace projekt
                     nazwisko = input[1];
                     pesel = input[2];
 
-                    //poprawność numeru PESEL
+                    //jeżeli walidacja numeru pesel jest poprawna
                     if (PeselCheck.IsValid(pesel))
                     {
                         string fileName = pesel + ".txt";
@@ -37,6 +38,7 @@ namespace projekt
                         string folderName = Path.Combine(desktopPath, "dane");
                         string folderPath = Path.Combine(desktopPath, filePath);                      
 
+                        //jeżeli folder "dane" nie istnieje to go stwórz
                         if (!Directory.Exists(folderName))
                         {
                             Directory.CreateDirectory(folderName);
@@ -49,6 +51,7 @@ namespace projekt
                             Console.WriteLine("Plik z numerem PESEL: {0} już istnieje! Został on nadpisany nowymi danymi.", pesel);
                             File.WriteAllText(fileName, "");
                         }
+                        //zapis do pliku
                         StreamWriter writer = new StreamWriter(new FileStream(folderPath, FileMode.OpenOrCreate, FileAccess.ReadWrite));
                         writer.WriteLine("{0}", miasto);
                         writer.WriteLine("{0} {1} {2}", imie, nazwisko, pesel);
