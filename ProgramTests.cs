@@ -13,21 +13,22 @@ namespace Tests
         [Test]
         public void TestCreateDirectory()
         {
-
+            // Arrange
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string folderName = Path.Combine(desktopPath, "dane");
 
-
+            // Act
             if (Directory.Exists(folderName))
             {
-                Directory.Delete(folderName, true);
+                Directory.Delete(folderName, true); //usuwa plik jak bedzie on na dysku
             }
-
-            
+        
             Directory.CreateDirectory(folderName);
 
-            
+            // Assert
             Assert.IsTrue(Directory.Exists(folderName));
+            Directory.Delete(folderName, true);
         }
+
     }
 }

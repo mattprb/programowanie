@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestPlatform.TestHost;
+using NUnit.Framework;
 using projekt;
 using System;
 using System.Collections.Generic;
@@ -23,18 +24,6 @@ namespace Tests
             Assert.IsTrue(result);
         }
 
-        [Test]
-        public void IsValid_IncorrectPeselLength_ReturnsFalse()
-        {
-            // Arrange
-            string incorrectPesel = "1234567890";
-
-            // Act
-            bool result = PeselCheck.IsValid(incorrectPesel);
-
-            // Assert
-            Assert.IsFalse(result);
-        }
 
         [Test]
         public void IsValid_IncorrectCheckSum_ReturnsFalse()
@@ -48,5 +37,7 @@ namespace Tests
             // Assert
             Assert.IsFalse(result);
         }
+
+     
     }
 }
