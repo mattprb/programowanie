@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace projekt1
+namespace projekt
 {
     internal class Program
     {
@@ -29,24 +30,37 @@ namespace projekt1
                     if (PeselCheck.IsValid(pesel))
                     {
                         string fileName = pesel + ".txt";
+                        string filePath = Path.Combine("dane", fileName);
+
                         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                        string filePath = Path.Combine(desktopPath, fileName);
+
+                        string folderName = Path.Combine(desktopPath, "dane");
+                        string folderPath = Path.Combine(desktopPath, filePath);                      
+
+                        if (!Directory.Exists(folderName))
+                        {
+                            Directory.CreateDirectory(folderName);
+                            Console.WriteLine("");
+                            Console.WriteLine("Utworzono folder dane");
+                        }
                         //jeżeli jest plik na pulpicie o nazwie *pesel* to wtedy go nadpisz
                         if (File.Exists(filePath))
                         {
                             Console.WriteLine("Plik z numerem PESEL: {0} już istnieje! Został on nadpisany nowymi danymi.", pesel);
                             File.WriteAllText(fileName, "");
                         }
-                        StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite));
+                        StreamWriter writer = new StreamWriter(new FileStream(folderPath, FileMode.OpenOrCreate, FileAccess.ReadWrite));
                         writer.WriteLine("{0}", miasto);
                         writer.WriteLine("{0} {1} {2}", imie, nazwisko, pesel);
                         writer.WriteLine("");
                         writer.Close();
-                        loop = false; //pętla kończy się po wpisaniu do pliku danych
+                        loop = false; //pętla kończy się po wpisaniu poprwanie danych do pliku danych
+
+
                     }
                     else Console.WriteLine("Niepoprawny PESEL!");
                 }
-                catch (Exception e)
+                catch (Exception e) 
                 {
                     Console.WriteLine("Błąd wpisywania! Szczegóły: {0} ", e);
                 }
