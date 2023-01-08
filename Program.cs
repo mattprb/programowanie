@@ -46,11 +46,12 @@ namespace projekt
                             Console.WriteLine("Utworzono folder 'dane' na pulpicie!");
                         }
                         //jeżeli jest plik na pulpicie o nazwie *pesel* to wtedy go nadpisz
-                        if (File.Exists(filePath))
+                        if (File.Exists(folderPath))
                         {
                             Console.WriteLine("Plik z numerem PESEL: {0} już istnieje! Został on nadpisany nowymi danymi.", pesel);
                             File.WriteAllText(fileName, "");
                         }
+                        
                         //zapis do pliku
                         StreamWriter writer = new StreamWriter(new FileStream(folderPath, FileMode.OpenOrCreate, FileAccess.ReadWrite));
                         writer.WriteLine("{0}", miasto);
