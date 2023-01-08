@@ -42,8 +42,8 @@ namespace projekt
                         if (!Directory.Exists(folderName))
                         {
                             Directory.CreateDirectory(folderName);
-                            Console.WriteLine("");
-                            Console.WriteLine("Utworzono folder dane");
+                            Console.WriteLine();
+                            Console.WriteLine("Utworzono folder 'dane' na pulpicie!");
                         }
                         //jeżeli jest plik na pulpicie o nazwie *pesel* to wtedy go nadpisz
                         if (File.Exists(filePath))
